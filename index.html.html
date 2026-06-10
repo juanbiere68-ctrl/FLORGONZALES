@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Bienestar Emocional — Flor González</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F7F3EE;
+  --cream2:#EFE9E0;
+  --cream3:#E5DDD0;
+  --gold:#C4974A;
+  --gold2:#A67C3A;
+  --brown:#5C4033;
+  --brown2:#3D2B1F;
+  --text:#2A1F1A;
+  --text2:#7A6458;
+  --text3:#B0998A;
+  --white:#FFFDF9;
+  --border:#DDD0C0;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* STARS BG */
+.stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.4}
+.star{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;animation:twinkle var(--d,3s) infinite ease-in-out}
+@keyframes twinkle{0%,100%{opacity:0.2;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+
+/* HERO */
+.hero{position:relative;z-index:1;text-align:center;padding:60px 24px 48px;background:linear-gradient(180deg,var(--cream) 0%,var(--cream2) 100%)}
+.flor-marca{display:inline-flex;flex-direction:column;align-items:center;gap:2px;margin-bottom:28px}
+.flor-marca .marca-top{font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.2em;color:var(--text3);text-transform:uppercase}
+.flor-marca .marca-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--brown);line-height:1}
+.flor-marca .marca-sub{font-size:10px;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase;margin-top:2px}
+.hero-symbol{font-size:32px;margin-bottom:16px;display:block;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);font-weight:300;font-style:italic;line-height:1.15;color:var(--brown);margin-bottom:12px;letter-spacing:-0.5px}
+.hero h1 strong{font-weight:600;font-style:normal;color:var(--gold)}
+.hero-sub{font-size:14px;color:var(--text2);max-width:400px;margin:0 auto 36px;line-height:1.7;font-weight:300}
+.hero-divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 32px}
+
+/* ESTADO EMOCIONAL */
+.section{position:relative;z-index:1;padding:40px 20px;max-width:680px;margin:0 auto}
+.section-tag{display:inline-block;font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,32px);font-weight:300;color:var(--brown);margin-bottom:8px;line-height:1.2}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:28px;font-weight:300}
+
+/* TEST EMOCIONAL */
+.estado-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:32px}
+@media(max-width:480px){.estado-grid{grid-template-columns:repeat(2,1fr)}}
+.estado-btn{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:16px 10px;cursor:pointer;text-align:center;transition:all 0.25s;position:relative;overflow:hidden}
+.estado-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--gold2));opacity:0;transition:opacity 0.25s}
+.estado-btn:hover::before{opacity:0.08}
+.estado-btn.active{border-color:var(--gold);background:linear-gradient(135deg,#FDF8F0,var(--white))}
+.estado-btn.active::after{content:'';position:absolute;inset:0;border:2px solid var(--gold);border-radius:16px;pointer-events:none}
+.estado-icon{font-size:24px;margin-bottom:6px;display:block;position:relative;z-index:1}
+.estado-label{font-size:11px;font-weight:500;color:var(--brown);display:block;position:relative;z-index:1;line-height:1.3}
+.estado-btn.active .estado-label{color:var(--gold2)}
+
+/* CONTENIDO DINÁMICO */
+.contenido-box{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:28px;margin-bottom:24px;display:none;animation:fadeUp 0.4s ease}
+.contenido-box.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.contenido-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.contenido-icon{font-size:28px}
+.contenido-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--brown)}
+.contenido-msg{font-size:13px;color:var(--text2);font-style:italic;margin-top:2px}
+
+/* RECURSOS */
+.recursos-list{display:flex;flex-direction:column;gap:12px}
+.recurso-item{background:var(--cream);border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start}
+.recurso-ico{font-size:20px;flex-shrink:0;margin-top:2px}
+.recurso-title{font-size:13px;font-weight:500;color:var(--brown);margin-bottom:4px}
+.recurso-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.recurso-btn{display:inline-block;margin-top:8px;padding:6px 14px;background:var(--gold);color:var(--white);font-size:11px;font-weight:500;border-radius:20px;cursor:pointer;border:none;font-family:'Jost',sans-serif;letter-spacing:0.05em}
+.recurso-btn:hover{background:var(--gold2)}
+
+/* AFIRMACIONES */
+.afirmacion-box{background:linear-gradient(135deg,var(--cream2),var(--cream3));border:1px solid var(--border);border-radius:20px;padding:32px 24px;text-align:center;margin:24px 0;position:relative;overflow:hidden}
+.afirmacion-stars{position:absolute;top:12px;right:16px;font-size:14px;opacity:0.4}
+.afirmacion-text{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4vw,24px);font-weight:300;font-style:italic;color:var(--brown);line-height:1.5;margin-bottom:16px}
+.afirmacion-text strong{font-weight:600;color:var(--gold2)}
+.afirmacion-btn{background:transparent;border:1px solid var(--gold);color:var(--gold2);font-size:11px;padding:7px 18px;border-radius:20px;cursor:pointer;font-family:'Jost',sans-serif;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;transition:all 0.2s}
+.afirmacion-btn:hover{background:var(--gold);color:var(--white)}
+
+/* RESPIRACIÓN */
+.respiracion-box{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:28px;text-align:center;margin:24px 0}
+.respiracion-circle{width:100px;height:100px;border-radius:50%;border:2px solid var(--gold);margin:16px auto;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text2);position:relative;transition:transform 4s ease-in-out,opacity 0.5s}
+.respiracion-circle.inhala{transform:scale(1.3);opacity:1}
+.respiracion-circle.exhala{transform:scale(1);opacity:0.7}
+.respiracion-circle.pausa{transform:scale(1.3);opacity:0.9}
+.respiracion-ring{position:absolute;inset:-6px;border-radius:50%;border:1px solid var(--cream3);animation:pulse-ring 4s ease-in-out infinite}
+@keyframes pulse-ring{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.1);opacity:1}}
+.resp-fase{font-size:15px;font-weight:500;color:var(--brown);margin-top:8px}
+.resp-count{font-size:28px;font-weight:300;color:var(--gold);font-family:'Cormorant Garamond',serif}
+.resp-desc{font-size:12px;color:var(--text3);margin-top:4px;margin-bottom:16px}
+.resp-btn{background:var(--gold);color:var(--white);border:none;padding:10px 24px;border-radius:20px;font-size:13px;cursor:pointer;font-family:'Jost',sans-serif;font-weight:500}
+.resp-btn:hover{background:var(--gold2)}
+.resp-btn.activo{background:var(--brown)}
+
+/* AGENDA */
+.agenda-section{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:24px;margin:24px 0}
+.agenda-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--brown);margin-bottom:4px}
+.agenda-sub{font-size:12px;color:var(--text3);margin-bottom:20px}
+.servicios-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:400px){.servicios-grid{grid-template-columns:1fr}}
+.servicio-card{background:var(--cream);border-radius:12px;padding:14px;text-align:center}
+.servicio-icon{font-size:22px;margin-bottom:6px}
+.servicio-name{font-size:12px;font-weight:500;color:var(--brown);margin-bottom:4px}
+.servicio-desc{font-size:11px;color:var(--text2);line-height:1.4;margin-bottom:10px}
+.servicio-btn{display:block;width:100%;padding:7px;background:var(--brown);color:var(--white);font-size:11px;border-radius:8px;cursor:pointer;border:none;font-family:'Jost',sans-serif;font-weight:500;transition:background 0.2s}
+.servicio-btn:hover{background:var(--gold2)}
+
+/* MEDITACIÓN MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(42,31,26,0.85);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.active{display:flex}
+.modal-box{background:var(--cream);border-radius:24px;padding:32px 24px;max-width:380px;width:100%;text-align:center;position:relative;animation:fadeUp 0.3s ease}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text2)}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--brown);margin-bottom:8px}
+.modal-steps{text-align:left;margin:16px 0}
+.modal-step{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.modal-step:last-child{border:none}
+.modal-step-num{width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--white);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.modal-step-text{font-size:12px;color:var(--text);line-height:1.5}
+
+/* FRASE FINAL */
+.frase-final{text-align:center;padding:40px 24px 60px;position:relative;z-index:1}
+.frase-final p{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,4vw,22px);font-style:italic;color:var(--brown2);line-height:1.6;max-width:480px;margin:0 auto 20px;font-weight:300}
+.frase-final strong{font-weight:600;color:var(--gold)}
+.frase-firma{font-size:12px;color:var(--text3);letter-spacing:0.1em}
+.whatsapp-btn{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:12px 24px;background:var(--brown);color:var(--white);border-radius:28px;font-size:13px;font-weight:500;text-decoration:none;transition:background 0.2s;border:none;cursor:pointer;font-family:'Jost',sans-serif}
+.whatsapp-btn:hover{background:var(--brown2)}
+
+/* DIVIDER DECORATIVO */
+.deco-divider{text-align:center;padding:8px 0;color:var(--gold);font-size:14px;letter-spacing:0.3em;opacity:0.5}
+
+.evento-item{background:var(--cream);border-radius:10px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:border-color 0.2s}
+.evento-item:hover{border-color:var(--gold2)}
+.evento-header{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.evento-fecha-box{min-width:48px;text-align:center;background:rgba(196,151,74,0.15);border-radius:8px;padding:4px 0;flex-shrink:0}
+.evento-dia{font-size:9px;font-weight:600;color:var(--text3);text-transform:uppercase}
+.evento-num{font-size:16px;font-weight:700;color:var(--gold2);line-height:1}
+.evento-info{flex:1}
+.evento-nombre{font-size:12px;font-weight:600;color:var(--brown)}
+.evento-precio{font-size:10px;color:var(--text3);margin-top:1px}
+.evento-arrow{font-size:14px;color:var(--gold);transition:transform 0.3s;flex-shrink:0}
+.evento-arrow.open{transform:rotate(180deg)}
+.evento-body{display:none;padding:0 12px 12px 12px;border-top:1px solid var(--border);animation:fadeUp 0.25s ease}
+.evento-body p{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:10px;padding-top:10px}
+.evento-wa{width:100%;padding:9px;background:var(--brown);color:var(--white);border:none;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;font-family:"Jost",sans-serif;transition:background 0.2s}
+.evento-wa:hover{background:var(--gold2)}
+</style>
+</head>
+<body>
+
+<!-- ESTRELLAS -->
+<div class="stars" id="stars"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="flor-marca">
+    <span class="marca-top">Instituto</span>
+    <span class="marca-name">Flor González</span>
+    <span class="marca-sub">✦ Conexión Estelar ✦</span>
+  </div>
+  <span class="hero-symbol">✦</span>
+  <h1>Tu energía te conecta<br>con tu <strong>propósito</strong></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">Este espacio fue creado para acompañarte. Elegí cómo te sentís hoy y recibí lo que necesitás.</p>
+</div>
+
+<!-- SECCIÓN ESTADO -->
+<div class="section">
+  <div class="section-tag">✦ Punto de partida</div>
+  <h2 class="section-title">¿Cómo llegás<br><em>hoy a este espacio?</em></h2>
+  <p class="section-desc">No hay respuesta correcta. Solo lo que sentís en este momento.</p>
+
+  <div class="estado-grid">
+    <button class="estado-btn" onclick="setEstado('cansada',this)">
+      <span class="estado-icon">🌙</span>
+      <span class="estado-label">Agotada o sin energía</span>
+    </button>
+    <button class="estado-btn" onclick="setEstado('ansiosa',this)">
+      <span class="estado-icon">🌀</span>
+      <span class="estado-label">Ansiosa o acelerada</span>
+    </button>
+    <button class="estado-btn" onclick="setEstado('triste',this)">
+      <span class="estado-icon">🌧</span>
+      <span class="estado-label">Triste o pesada</span>
+    </button>
+    <button class="estado-btn" onclick="setEstado('perdida',this)">
+      <span class="estado-icon">🌫</span>
+      <span class="estado-label">Perdida o sin rumbo</span>
+    </button>
+    <button class="estado-btn" onclick="setEstado('bien',this)">
+      <span class="estado-icon">🌱</span>
+      <span class="estado-label">Bien y quiero crecer</span>
+    </button>
+    <button class="estado-btn" onclick="setEstado('lista',this)">
+      <span class="estado-icon">✨</span>
+      <span class="estado-label">Lista para transformar</span>
+    </button>
+  </div>
+
+  <!-- CANSADA -->
+  <div class="contenido-box" id="box-cansada">
+    <div class="contenido-header">
+      <span class="contenido-icon">🌙</span>
+      <div><div class="contenido-title">Para el agotamiento</div><div class="contenido-msg">Tu cuerpo te está pidiendo algo importante</div></div>
+    </div>
+    <div class="recursos-list">
+      <div class="recurso-item"><span class="recurso-ico">🌬</span><div><div class="recurso-title">Respiración restaurativa</div><div class="recurso-desc">3 minutos de respiración consciente para bajar el nivel de cortisol y volver a vos.</div><button class="recurso-btn" onclick="abrirRespiracion()">Iniciar ahora</button></div></div>
+      <div class="recurso-item"><span class="recurso-ico">📖</span><div><div class="recurso-title">Reflexión de hoy</div><div class="recurso-desc">Preguntate: ¿Qué estoy cargando que no es mío? Escribilo. Soltarlo en papel ya es un primer paso.</div></div></div>
+      <div class="recurso-item"><span class="recurso-ico">🌿</span><div><div class="recurso-title">Práctica para esta tarde</div><div class="recurso-desc">5 minutos en silencio, sin pantallas. Solo vos y tu respiración. Nada más se necesita.</div></div></div>
+    </div>
+    <div class="afirmacion-box" style="margin-top:20px">
+      <span class="afirmacion-stars">✦ ✦ ✦</span>
+      <div class="afirmacion-text" id="afirm-cansada">"Merezco descansar.<br><strong>Mi valor no depende de cuánto produzco.</strong>"</div>
+      <button class="afirmacion-btn" onclick="nuevaAfirmacion('cansada')">Nueva afirmación ✦</button>
+    </div>
+  </div>
+
+  <!-- ANSIOSA -->
+  <div class="contenido-box" id="box-ansiosa">
+    <div class="contenido-header">
+      <span class="contenido-icon">🌀</span>
+      <div><div class="contenido-title">Para la ansiedad</div><div class="contenido-msg">Estás presente. Ya es suficiente.</div></div>
+    </div>
+    <div class="recursos-list">
+      <div class="recurso-item"><span class="recurso-ico">🌬</span><div><div class="recurso-title">Técnica 4-7-8</div><div class="recurso-desc">Inhalá 4 segundos, sostené 7, exhalá 8. Activa el sistema parasimpático en minutos.</div><button class="recurso-btn" onclick="abrirRespiracion()">Practicar ahora</button></div></div>
+      <div class="recurso-item"><span class="recurso-ico">🔍</span><div><div class="recurso-title">Anclaje al presente</div><div class="recurso-desc">Nombrá 5 cosas que ves, 4 que tocás, 3 que oís, 2 que olés, 1 que saboreás. Volvé aquí.</div></div></div>
+      <div class="recurso-item"><span class="recurso-ico">💌</span><div><div class="recurso-title">Mensaje para vos</div><div class="recurso-desc">La ansiedad es energía que todavía no encontró su camino. No la peléés — guiala. Eso también es trabajo espiritual.</div></div></div>
+    </div>
+    <div class="afirmacion-box" style="margin-top:20px">
+      <span class="afirmacion-stars">✦ ✦ ✦</span>
+      <div class="afirmacion-text" id="afirm-ansiosa">"Estoy segura <strong>en este momento.</strong><br>El futuro se cuida solo."</div>
+      <button class="afirmacion-btn" onclick="nuevaAfirmacion('ansiosa')">Nueva afirmación ✦</button>
+    </div>
+  </div>
+
+  <!-- TRISTE -->
+  <div class="contenido-box" id="box-triste">
+    <div class="contenido-header">
+      <span class="contenido-icon">🌧</span>
+      <div><div class="contenido-title">Para la tristeza</div><div class="contenido-msg">Sentir también es sanar</div></div>
+    </div>
+    <div class="recursos-list">
+      <div class="recurso-item"><span class="recurso-ico">🕯</span><div><div class="recurso-title">Permitite sentir</div><div class="recurso-desc">La tristeza no es el problema. Negarla sí. Dala 10 minutos completos. Ponele nombre. Luego seguís.</div></div></div>
+      <div class="recurso-item"><span class="recurso-ico">🌬</span><div><div class="recurso-title">Respiración compasiva</div><div class="recurso-desc">Inhalá amor hacia vos misma. Exhalá lo que ya no necesitás. Tres veces. Con las manos en el corazón.</div><button class="recurso-btn" onclick="abrirRespiracion()">Iniciar</button></div></div>
+      <div class="recurso-item"><span class="recurso-ico">📝</span><div><div class="recurso-title">Ejercicio de cierre</div><div class="recurso-desc">Escribí una cosa, solo una, que todavía te sostiene hoy. Eso es tu ancla.</div></div></div>
+    </div>
+    <div class="afirmacion-box" style="margin-top:20px">
+      <span class="afirmacion-stars">✦ ✦ ✦</span>
+      <div class="afirmacion-text" id="afirm-triste">"<strong>Soy suficiente</strong> incluso cuando no puedo verlo.<br>Esto también va a pasar."</div>
+      <button class="afirmacion-btn" onclick="nuevaAfirmacion('triste')">Nueva afirmación ✦</button>
+    </div>
+  </div>
+
+  <!-- PERDIDA -->
+  <div class="contenido-box" id="box-perdida">
+    <div class="contenido-header">
+      <span class="contenido-icon">🌫</span>
+      <div><div class="contenido-title">Para el desconcierto</div><div class="contenido-msg">No saber también es un camino</div></div>
+    </div>
+    <div class="recursos-list">
+      <div class="recurso-item"><span class="recurso-ico">🧭</span><div><div class="recurso-title">Pregunta orientadora</div><div class="recurso-desc">¿Qué es lo que más te importa en este momento de tu vida? No el "deber ser" — lo que genuinamente importa.</div></div></div>
+      <div class="recurso-item"><span class="recurso-ico">✍️</span><div><div class="recurso-title">Escritura libre</div><div class="recurso-desc">5 minutos escribiendo sin parar, sin corregir. Lo que salga. La claridad aparece en el movimiento, no en la parálisis.</div></div></div>
+      <div class="recurso-item"><span class="recurso-ico">🌬</span><div><div class="recurso-title">Respiración de apertura</div><div class="recurso-desc">Cuando no sabemos el destino, volvemos al presente. La respiración siempre es el camino de regreso.</div><button class="recurso-btn" onclick="abrirRespiracion()">Volver al centro</button></div></div>
+    </div>
+    <div class="afirmacion-box" style="margin-top:20px">
+      <span class="afirmacion-stars">✦ ✦ ✦</span>
+      <div class="afirmacion-text" id="afirm-perdida">"No necesito tener todo claro.<br><strong>Confío en el proceso que me lleva.</strong>"</div>
+      <button class="afirmacion-btn" onclick="nuevaAfirmacion('perdida')">Nueva afirmación ✦</button>
+    </div>
+  </div>
+
+  <!-- BIEN -->
+  <div class="contenido-box" id="box-bien">
+    <div class="contenido-header">
+      <span class="contenido-icon">🌱</span>
+      <div><div class="contenido-title">Para el crecimiento</div><div class="contenido-msg">Desde la estabilidad se construye todo</div></div>
+    </div>
+    <div class="recursos-list">
+      <div class="recurso-item"><span class="recurso-ico">🎯</span><div><div class="recurso-title">Intención del día</div><div class="recurso-desc">Elegí una sola intención para hoy. No una meta — una intención. ¿Cómo querés estar presente hoy?</div></div></div>
+      <div class="recurso-item"><span class="recurso-ico">🌬</span><div><div class="recurso-title">Respiración de expansión</div><div class="recurso-desc">Desde el bienestar podemos expandirnos. Tres respiraciones profundas para anclar este estado positivo.</div><button class="recurso-btn" onclick="abrirRespiracion()">Expandir energía</button></div></div>
+      <div class="recurso-item"><span class="recurso-ico">💛</span><div><div class="recurso-title">Gratitud activa</div><div class="recurso-desc">Nombrá tres cosas concretas por las que estás agradecida hoy. La gratitud multiplica lo bueno.</div></div></div>
+    </div>
+    <div class="afirmacion-box" style="margin-top:20px">
+      <span class="afirmacion-stars">✦ ✦ ✦</span>
+      <div class="afirmacion-text" id="afirm-bien">"<strong>Estoy en el lugar correcto,</strong><br>en el momento correcto, siendo quien soy."</div>
+      <button class="afirmacion-btn" onclick="nuevaAfirmacion('bien')">Nueva afirmación ✦</button>
+    </div>
+  </div>
+
+  <!-- LISTA -->
+  <div class="contenido-box" id="box-lista">
+    <div class="contenido-header">
+      <span class="contenido-icon">✨</span>
+      <div><div class="contenido-title">Para la transformación</div><div class="contenido-msg">La decisión ya fue tomada. Ahora el camino.</div></div>
+    </div>
+    <div class="recursos-list">
+      <div class="recurso-item"><span class="recurso-ico">🔥</span><div><div class="recurso-title">El primer paso</div><div class="recurso-desc">La transformación no empieza con un gran cambio. Empieza con una decisión pequeña y consistente. ¿Cuál es la tuya hoy?</div></div></div>
+      <div class="recurso-item"><span class="recurso-ico">🌬</span><div><div class="recurso-title">Respiración de activación</div><div class="recurso-desc">Tres respiraciones profundas para conectar con tu energía más poderosa. Inhalá tu potencial. Exhalá las dudas.</div><button class="recurso-btn" onclick="abrirRespiracion()">Activar ahora</button></div></div>
+      <div class="recurso-item"><span class="recurso-ico">📅</span><div><div class="recurso-title">Agendá una sesión</div><div class="recurso-desc">Cuando estás lista, el trabajo en conjunto acelera todo. Una sesión con Flor puede ser el punto de quiebre.</div><button class="recurso-btn" onclick="contactarFlor()">Reservar sesión</button></div></div>
+    </div>
+    <div class="afirmacion-box" style="margin-top:20px">
+      <span class="afirmacion-stars">✦ ✦ ✦</span>
+      <div class="afirmacion-text" id="afirm-lista">"Elijo <strong>crecer hacia mi mejor versión.</strong><br>Estoy lista para lo que viene."</div>
+      <button class="afirmacion-btn" onclick="nuevaAfirmacion('lista')">Nueva afirmación ✦</button>
+    </div>
+  </div>
+
+  <!-- AGENDA Y SERVICIOS -->
+  <div class="deco-divider">✦ · · · ✦ · · · ✦</div>
+  <div class="agenda-section">
+    <div class="agenda-title">Trabajemos juntas</div>
+    <div class="agenda-sub">Cada proceso es único. El camino lo creamos vos y yo.</div>
+    <div class="servicios-grid">
+      <div class="servicio-card">
+        <div class="servicio-icon">🌟</div>
+        <div class="servicio-name">Sesión Individual</div>
+        <div class="servicio-desc">Espacio personal de conexión, terapia y acompañamiento.</div>
+        <button class="servicio-btn" onclick="contactarFlor()">Reservar</button>
+      </div>
+      <div class="servicio-card">
+        <div class="servicio-icon">🌙</div>
+        <div class="servicio-name">Taller Grupal</div>
+        <div class="servicio-desc">Experiencias en grupo para crecer en comunidad.</div>
+        <button class="servicio-btn" onclick="contactarFlor()">Ver fechas</button>
+      </div>
+      <div class="servicio-card">
+        <div class="servicio-icon">☀️</div>
+        <div class="servicio-name">Meditación Guiada</div>
+        <div class="servicio-desc">Sesión de meditación para activar tu energía interior.</div>
+        <button class="servicio-btn" onclick="abrirMeditacion()">Iniciar ahora</button>
+      </div>
+      <div class="servicio-card">
+        <div class="servicio-icon">✦</div>
+        <div class="servicio-name">Conexión Estelar</div>
+        <div class="servicio-desc">Trabajo profundo de reconexión con tu propósito.</div>
+        <button class="servicio-btn" onclick="contactarFlor()">Saber más</button>
+      </div>
+    </div>
+
+    <!-- CALENDARIO ACORDEÓN JUNIO -->
+    <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border)">
+      <div style="font-size:11px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px">⚜️ Agenda Junio — Inscripción Abierta</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+
+        <div class="evento-item" onclick="toggleEvento(0)">
+          <div class="evento-header">
+            <div class="evento-fecha-box"><div class="evento-dia">Vie</div><div class="evento-num">20/6</div></div>
+            <div class="evento-info">
+              <div class="evento-nombre">Autosanación Módulo 1 · 9:00 hs</div>
+              <div class="evento-precio">12 cuotas de $750 uy</div>
+            </div>
+            <div class="evento-arrow" id="arrow-0">﹀</div>
+          </div>
+          <div class="evento-body" id="body-0">
+            <p>Taller con símbolos sagrados y cuarzos cristal para limpiar tu energía y vitalidad en tu desarrollo espiritual.</p>
+            <button class="evento-wa" onclick="event.stopPropagation();contactarFlor()">💬 Inscribirme · seña 50%</button>
+          </div>
+        </div>
+
+        <div class="evento-item" onclick="toggleEvento(1)">
+          <div class="evento-header">
+            <div class="evento-fecha-box"><div class="evento-dia">Vie</div><div class="evento-num">20/6</div></div>
+            <div class="evento-info">
+              <div class="evento-nombre">El camino de las 7 rosas · 17:00 hs</div>
+              <div class="evento-precio">$2.330 uy</div>
+            </div>
+            <div class="evento-arrow" id="arrow-1">﹀</div>
+          </div>
+          <div class="evento-body" id="body-1">
+            <p>Cuatro encuentros con la energía de Madre María. Dejá atrás tu vieja versión con la energía expansiva del amor.</p>
+            <button class="evento-wa" onclick="event.stopPropagation();contactarFlor()">💬 Inscribirme · seña 50%</button>
+          </div>
+        </div>
+
+        <div class="evento-item" onclick="toggleEvento(2)">
+          <div class="evento-header">
+            <div class="evento-fecha-box"><div class="evento-dia">Dom</div><div class="evento-num">14/6</div></div>
+            <div class="evento-info">
+              <div class="evento-nombre">Conexión Agni Yoga · 17:00 hs</div>
+              <div class="evento-precio">$2.000 uy</div>
+            </div>
+            <div class="evento-arrow" id="arrow-2">﹀</div>
+          </div>
+          <div class="evento-body" id="body-2">
+            <p>Activamos energía vital con Maje y soltamos con meditación de conexión. ¡Una combinación imperdible!</p>
+            <button class="evento-wa" onclick="event.stopPropagation();contactarFlor()">💬 Inscribirme · seña 50%</button>
+          </div>
+        </div>
+
+        <div class="evento-item" onclick="toggleEvento(3)">
+          <div class="evento-header">
+            <div class="evento-fecha-box"><div class="evento-dia">Dom</div><div class="evento-num">21/6</div></div>
+            <div class="evento-info">
+              <div class="evento-nombre">Ritual para Manifestar · 18:00 hs</div>
+              <div class="evento-precio">$1.250 uy</div>
+            </div>
+            <div class="evento-arrow" id="arrow-3">﹀</div>
+          </div>
+          <div class="evento-body" id="body-3">
+            <p>Construye tu propio árbol de Yule para sembrar tus deseos y proteger tu hogar. Incluye merienda y tarot.</p>
+            <button class="evento-wa" onclick="event.stopPropagation();contactarFlor()">💬 Inscribirme · seña 50%</button>
+          </div>
+        </div>
+
+      </div>
+      <div style="margin-top:10px;text-align:center;font-size:11px;color:var(--text3)">💥 Con una seña del 50% ya podés inscribirte · Tocá cada evento para ver más</div>
+    </div>
+
+    <!-- DIRECCIÓN -->
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);text-align:center">
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px">📍 Dónde encontrarnos</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--brown)">Colonia del Sacramento</div>
+      <div style="font-size:13px;color:var(--text2);margin-top:2px">Manuel de Lobo 364</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FRASE FINAL -->
+<div class="frase-final">
+  <p>"Lo que hoy sentís, <strong>mañana será tu poder.</strong><br>Cada proceso es único. Lo importante es disfrutar el camino."</p>
+  <div class="frase-firma">— Flor González · Conexión Estelar</div>
+  <button class="whatsapp-btn" onclick="contactarFlor()">💬 Escribile a Flor</button>
+</div>
+
+<!-- MODAL RESPIRACIÓN -->
+<div class="modal-overlay" id="modal-resp">
+  <div class="modal-box">
+    <button class="modal-close" onclick="cerrarModal('modal-resp')">✕</button>
+    <div class="modal-title">Respiración Consciente</div>
+    <div class="respiracion-box">
+      <div class="resp-fase" id="resp-fase">Preparate</div>
+      <div class="respiracion-circle" id="resp-circle">
+        <div class="respiracion-ring"></div>
+        <span id="resp-num">✦</span>
+      </div>
+      <div class="resp-count" id="resp-count">0 / 5</div>
+      <div class="resp-desc" id="resp-desc">Presioná iniciar para comenzar</div>
+      <button class="resp-btn" id="resp-btn" onclick="iniciarRespiracion()">Iniciar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL MEDITACIÓN -->
+<div class="modal-overlay" id="modal-med">
+  <div class="modal-box">
+    <button class="modal-close" onclick="cerrarModal('modal-med')">✕</button>
+    <div class="modal-title">Meditación Guiada</div>
+    <p style="font-size:13px;color:var(--text2);margin:8px 0 16px;line-height:1.6">Una práctica de 5 minutos para reconectar con tu centro.</p>
+    <div class="modal-steps">
+      <div class="modal-step"><div class="modal-step-num">1</div><div class="modal-step-text">Encontrá una posición cómoda. Cerrá los ojos suavemente.</div></div>
+      <div class="modal-step"><div class="modal-step-num">2</div><div class="modal-step-text">Llevá tu atención a la respiración. Solo observá, sin cambiar nada.</div></div>
+      <div class="modal-step"><div class="modal-step-num">3</div><div class="modal-step-text">Visualizá una luz dorada en el centro de tu pecho. Cálida. Tuya.</div></div>
+      <div class="modal-step"><div class="modal-step-num">4</div><div class="modal-step-text">Con cada inhalación, esa luz crece. Con cada exhalación, se expande.</div></div>
+      <div class="modal-step"><div class="modal-step-num">5</div><div class="modal-step-text">Cuando estés lista, volvé suavemente. Llevá esa luz con vos.</div></div>
+    </div>
+    <button class="resp-btn" onclick="cerrarModal('modal-med')">Completar práctica</button>
+  </div>
+</div>
+
+<script>
+// ESTRELLAS
+const starsEl = document.getElementById('stars');
+for(let i=0;i<40;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  s.style.left=Math.random()*100+'%';
+  s.style.top=Math.random()*100+'%';
+  s.style.setProperty('--d',(2+Math.random()*4)+'s');
+  s.style.animationDelay=(Math.random()*4)+'s';
+  starsEl.appendChild(s);
+}
+
+// ESTADO
+let estadoActual = null;
+function setEstado(estado, btn){
+  estadoActual = estado;
+  document.querySelectorAll('.estado-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.contenido-box').forEach(b=>b.classList.remove('active'));
+  const box = document.getElementById('box-'+estado);
+  if(box){
+    box.classList.add('active');
+    setTimeout(()=>box.scrollIntoView({behavior:'smooth',block:'start'}),100);
+  }
+}
+
+// AFIRMACIONES
+const AFIRMACIONES = {
+  cansada:["\"Merezco descansar.<br><strong>Mi valor no depende de cuánto produzco.</strong>\"","\"El descanso también es sagrado.<br><strong>Reponer energía es un acto de amor propio.</strong>\"","\"No tengo que ganarme el descanso.<br><strong>Ya merezco parar.</strong>\"","\"Suelto la urgencia.<br><strong>El tiempo siempre es suficiente.</strong>\""],
+  ansiosa:["\"Estoy segura <strong>en este momento.</strong><br>El futuro se cuida solo.\"","\"Respiro y vuelvo.<br><strong>El presente siempre es suficiente.</strong>\"","\"Confío en el proceso.<br><strong>No necesito controlar todo.</strong>\"","\"La calma está dentro mío.<br><strong>Siempre estuvo ahí.</strong>\""],
+  triste:["\"<strong>Soy suficiente</strong> incluso cuando no puedo verlo.<br>Esto también va a pasar.\"","\"Permito que esto pase a través mío.<br><strong>Soy más que lo que siento ahora.</strong>\"","\"La tristeza me habla.<br><strong>La escucho sin quedarme en ella.</strong>\"","\"Hay amor en mi vida,<br><strong>incluso en los días oscuros.</strong>\""],
+  perdida:["\"No necesito tener todo claro.<br><strong>Confío en el proceso que me lleva.</strong>\"","\"El camino se construye caminando.<br><strong>No necesito verlo completo.</strong>\"","\"Cada paso, aunque pequeño,<br><strong>me acerca a donde debo estar.</strong>\"","\"No estoy perdida.<br><strong>Estoy encontrando mi camino.</strong>\""],
+  bien:["\"<strong>Estoy en el lugar correcto,</strong><br>en el momento correcto, siendo quien soy.\"","\"La vida fluye hacia mí<br><strong>con abundancia y facilidad.</strong>\"","\"Estoy enraizada y libre.<br><strong>Puedo crecer desde aquí.</strong>\"","\"Agradezco todo lo que soy<br><strong>y todo lo que estoy por ser.</strong>\""],
+  lista:["\"Elijo <strong>crecer hacia mi mejor versión.</strong><br>Estoy lista para lo que viene.\"","\"La transformación ya comenzó.<br><strong>Solo tengo que seguir.</strong>\"","\"Tengo todo lo que necesito<br><strong>para dar el siguiente paso.</strong>\"","\"Mi potencial no tiene límites.<br><strong>Elijo expandirme.</strong>\""]
+};
+const afirmIdx = {};
+function nuevaAfirmacion(estado){
+  if(!afirmIdx[estado]) afirmIdx[estado]=0;
+  afirmIdx[estado]=(afirmIdx[estado]+1)%(AFIRMACIONES[estado].length);
+  document.getElementById('afirm-'+estado).innerHTML=AFIRMACIONES[estado][afirmIdx[estado]];
+}
+
+// RESPIRACIÓN
+let respTimer=null, respCiclo=0, respFase=0, respActivo=false;
+const fases=[{n:'Inhalá',d:4,msg:'Inhalá lentamente por la nariz'},{n:'Sostené',d:7,msg:'Sostené el aire con calma'},{n:'Exhalá',d:8,msg:'Soltá todo por la boca'}];
+let respSeg=0;
+
+function abrirRespiracion(){
+  document.getElementById('modal-resp').classList.add('active');
+  resetRespiracion();
+}
+function cerrarModal(id){
+  document.getElementById(id).classList.remove('active');
+  if(respTimer){clearInterval(respTimer);respTimer=null;}
+  respActivo=false;
+  document.getElementById('resp-btn').textContent='Iniciar';
+  document.getElementById('resp-btn').classList.remove('activo');
+}
+function resetRespiracion(){
+  respCiclo=0;respFase=0;respSeg=0;
+  document.getElementById('resp-fase').textContent='Preparate';
+  document.getElementById('resp-num').textContent='✦';
+  document.getElementById('resp-count').textContent='0 / 5';
+  document.getElementById('resp-desc').textContent='Presioná iniciar para comenzar';
+  document.getElementById('resp-circle').className='respiracion-circle';
+}
+function iniciarRespiracion(){
+  if(respActivo){
+    clearInterval(respTimer);respTimer=null;respActivo=false;
+    document.getElementById('resp-btn').textContent='Iniciar';
+    document.getElementById('resp-btn').classList.remove('activo');
+    resetRespiracion();return;
+  }
+  respActivo=true;
+  document.getElementById('resp-btn').textContent='Detener';
+  document.getElementById('resp-btn').classList.add('activo');
+  respCiclo=0;respFase=0;respSeg=fases[0].d;
+  actualizarFase();
+  respTimer=setInterval(()=>{
+    respSeg--;
+    document.getElementById('resp-num').textContent=respSeg;
+    if(respSeg<=0){
+      respFase=(respFase+1)%3;
+      if(respFase===0) respCiclo++;
+      document.getElementById('resp-count').textContent=respCiclo+' / 5';
+      if(respCiclo>=5){
+        clearInterval(respTimer);respTimer=null;respActivo=false;
+        document.getElementById('resp-fase').textContent='¡Completado! ✦';
+        document.getElementById('resp-num').textContent='✦';
+        document.getElementById('resp-desc').textContent='Excelente. Llevá esta calma con vos.';
+        document.getElementById('resp-btn').textContent='Iniciar';
+        document.getElementById('resp-btn').classList.remove('activo');
+        return;
+      }
+      respSeg=fases[respFase].d;
+      actualizarFase();
+    }
+  },1000);
+}
+function actualizarFase(){
+  const f=fases[respFase];
+  document.getElementById('resp-fase').textContent=f.n;
+  document.getElementById('resp-desc').textContent=f.msg;
+  document.getElementById('resp-num').textContent=f.d;
+  const circle=document.getElementById('resp-circle');
+  circle.className='respiracion-circle';
+  void circle.offsetWidth;
+  circle.className='respiracion-circle '+(respFase===0?'inhala':respFase===1?'pausa':'exhala');
+}
+function abrirMeditacion(){
+  document.getElementById('modal-med').classList.add('active');
+}
+
+
+// CARGAR EVENTOS DESDE GOOGLE SHEETS
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1BxikgV_1Q2wsHtMkgTzfwFHy0MZDgtmV9n0wm6J0V_Y/pub?gid=0&single=true&output=csv';
+
+async function cargarEventos() {
+  try {
+    const res = await fetch(SHEET_CSV_URL);
+    const text = await res.text();
+    const rows = text.trim().split('\n').slice(1); // saltar header
+    const eventos = rows.map(row => {
+      const cols = row.split(',');
+      return {
+        dia: cols[0]?.trim(),
+        fecha: cols[1]?.trim(),
+        hora: cols[2]?.trim(),
+        nombre: cols[3]?.trim(),
+        descripcion: cols[4]?.trim(),
+        precio: cols[5]?.trim()
+      };
+    });
+    renderEventos(eventos);
+  } catch(e) {
+    console.log('Usando eventos locales');
+    renderEventos(null);
+  }
+}
+
+function renderEventos(eventos) {
+  if(!eventos || !eventos.length) return;
+  const lista = document.getElementById('eventos-lista');
+  if(!lista) return;
+  lista.innerHTML = eventos.map((ev, i) => `
+    <div class="evento-item" onclick="toggleEvento(${i})">
+      <div class="evento-header">
+        <div class="evento-fecha-box">
+          <div class="evento-dia">${ev.dia}</div>
+          <div class="evento-num">${ev.fecha}</div>
+        </div>
+        <div class="evento-info">
+          <div class="evento-nombre">${ev.nombre} · ${ev.hora}</div>
+          <div class="evento-precio">${ev.precio}</div>
+        </div>
+        <div class="evento-arrow" id="arrow-${i}">﹀</div>
+      </div>
+      <div class="evento-body" id="body-${i}">
+        <p>${ev.descripcion}</p>
+        <button class="evento-wa" onclick="event.stopPropagation();contactarFlor()">💬 Inscribirme · seña 50%</button>
+      </div>
+    </div>`).join('');
+}
+
+// Cargar al iniciar
+document.addEventListener('DOMContentLoaded', cargarEventos);
+
+function toggleEvento(idx){
+  const body = document.getElementById('body-'+idx);
+  const arrow = document.getElementById('arrow-'+idx);
+  const isOpen = body.style.display === 'block';
+  // cerrar todos
+  [0,1,2,3].forEach(i=>{
+    document.getElementById('body-'+i).style.display='none';
+    document.getElementById('arrow-'+i).classList.remove('open');
+  });
+  if(!isOpen){
+    body.style.display='block';
+    arrow.classList.add('open');
+  }
+}
+
+function contactarFlor(){
+  window.open('https://wa.me/59897801616','_blank');
+}
+</script>
+</body>
+</html>
